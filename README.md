@@ -1,3 +1,4 @@
+![MainMenu_ME-v1 0](https://user-images.githubusercontent.com/86949029/124515921-3517e480-dda6-11eb-8d92-5585495a12ff.png)
 # MispellesEngine-v1.0
  FNF MODIFICATION FOR KADE ENGINE, BASED OFF OF MIC'D UP ENGINE.
 
@@ -32,7 +33,8 @@ If you have any questions go there or add my discord: Mispelles#0336
 
 ![Tutorial (Hard) on Downscroll](https://user-images.githubusercontent.com/15311104/113989685-fa5aea80-9850-11eb-9180-f5819a774c79.gif) ![Milf (Hard) on Downscroll](https://user-images.githubusercontent.com/15311104/113990845-2c208100-9852-11eb-8e6d-f1c9e8439871.gif)
 
-![Roses (Hard) on Upscroll](https://user-images.githubusercontent.com/15311104/113993573-e31dfc00-9854-11eb-82ae-1f29dc8a0b04.png)
+![MainMenu_ME-v1 0](https://user-images.githubusercontent.com/86949029/124515921-3517e480-dda6-11eb-8d92-5585495a12ff.png) ![StoryMenu_ME-v1 0](https://user-images.githubusercontent.com/86949029/124515983-5bd61b00-dda6-11eb-90ae-2179ccd3e777.png)
+
 
 ![Milf (Hard) on Downscroll](https://user-images.githubusercontent.com/15311104/113991654-f4660900-9852-11eb-8c3d-f3927571f19b.png)
 

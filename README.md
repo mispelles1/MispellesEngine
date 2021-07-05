@@ -1,4 +1,4 @@
-![MainMenu_ME-v1 0](https://user-images.githubusercontent.com/86949029/124515921-3517e480-dda6-11eb-8d92-5585495a12ff.png)
+
 # MispellesEngine-v1.0
  FNF MODIFICATION FOR KADE ENGINE, BASED OFF OF MIC'D UP ENGINE.
 

@@ -52,13 +52,13 @@ If you have any questions go there or add my discord: Mispelles#0336
 	 - Like Guitar Hero, you will have to press the spave bar and DFJK to hit the notes!!
 
 This game was made with love to Newgrounds and its community. Extra love to Tom Fulp.
-### Mispelles Engine
+# Mispelles Engine
 - [Mispelles](https://twitter.com/mispelles) - Maintainer, lead programmer, Artist, Musician, Owner and Founder of StreamTeam FNF 
 - [Goomba](https://twitter.com/SmashingGoomba) - Ideas, Game Tester, 2nd Programmer
 - [Star](https://twitter.com/Stargazer_008) - Artist, Musician, Programmer
 - [Freddy](https://twitter.com/Frebdyyy) - Artist
 
-### Stream Team FNF
+# Stream Team FNF
 
 ![OverWorld](https://user-images.githubusercontent.com/86949029/124513413-642b5780-dda0-11eb-84e2-2b8919b1085c.png)
 

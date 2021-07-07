@@ -140,6 +140,30 @@ class DownscrollOption extends Option
 	}
 }
 
+class ChangeNoteSkin extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.switchState(new NoteStyleState());
+		FlxG.save.data.noteStyle = !FlxG.save.data.noteStyle;
+		display = updateDisplay();
+		return true;
+	}
+	//yesent
+	//this was sort of broken at the beginning lmao
+
+	private override function updateDisplay():String
+	{
+		return FlxG.save.data.noteStyle ? "Change?" : "Ima Change Them lol";
+	}
+}
+
 class GhostTapOption extends Option
 {
 	public function new(desc:String)

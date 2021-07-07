@@ -8,6 +8,11 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxGradient;
+import flixel.FlxObject;
+import flixel.tweens.FlxEase;
+import flixel.addons.display.FlxBackdrop;
+import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 
 
@@ -27,13 +32,32 @@ class FreeplayState extends MusicBeatState
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
+	var gradientBar:FlxSprite = new FlxSprite(0,0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
-
+	var camFollow:FlxObject;
+	var bg:FlxSprite;
+	var cracks:FlxBackdrop = new FlxBackdrop(Paths.image('shatterFreeplay'), 0.2, 0.2, true, true);
+	
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
+	private var colorRotation:Int = 1;
+
+	private var bgColors:Array<String> = [
+		'#314d7f',
+		'#4e7093',
+		'#70526e',
+		'#594465'
+	];
+
+	private var bgColors2:Array<String> = [
+		'#594465',
+		'#314d7f',
+		'#70526e',
+		'#4e7093'
+	];
 
 	override function create()
 	{
@@ -68,18 +92,25 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
 		add(bg);
+
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x553D0468, 0xAABF1943], 1, 90, true); 
+		gradientBar.y = FlxG.height - gradientBar.height;
+		add(gradientBar);
+		gradientBar.scrollFactor.set(0, 0);
+
+		var backdrop:FlxBackdrop;
+		add(backdrop = new FlxBackdrop(Paths.image('shatterFreeplay')));
+		backdrop.velocity.set(-40, -40);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
-			songText.isMenuItem = true;
-			songText.targetY = i;
-			grpSongs.add(songText);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 90, songs[i].songName, true, false, true);
+			songText.isFreePlayTextState = true;
 
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
@@ -88,9 +119,11 @@ class FreeplayState extends MusicBeatState
 			iconArray.push(icon);
 			add(icon);
 
-			// songText.x += 40;
+	
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
+			songText.screenCenter(X);
+			grpSongs.add(songText);
+
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
@@ -183,17 +216,20 @@ class FreeplayState extends MusicBeatState
 
 		if (upP)
 		{
-			changeSelection(-1);
+			changeDiff(-1);
 		}
 		if (downP)
 		{
-			changeSelection(1);
+			changeDiff(1);
+			FlxTween.color(bg, 0.4, bg.color, FlxColor.fromString(bgColors[colorRotation]));
 		}
 
 		if (controls.LEFT_P)
-			changeDiff(-1);
+			changeSelection(-1);
+
 		if (controls.RIGHT_P)
-			changeDiff(1);
+			changeSelection(1);
+
 
 		if (controls.BACK)
 		{
@@ -211,7 +247,9 @@ class FreeplayState extends MusicBeatState
 			PlayState.storyDifficulty = curDifficulty;
 			PlayState.storyWeek = songs[curSelected].week;
 			trace('CUR WEEK' + PlayState.storyWeek);
+			FlxTween.tween(FlxG.camera, { zoom: 5}, 1.1, { ease: FlxEase.expoInOut });
 			LoadingState.loadAndSwitchState(new PlayState());
+			
 		}
 	}
 
@@ -241,6 +279,9 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
+		FlxTween.color(bg, 0.5, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+
+		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
 		#if !switch
 		// NGio.logEvent('Fresh');
 		#end

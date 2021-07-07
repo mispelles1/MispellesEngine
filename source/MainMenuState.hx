@@ -8,6 +8,7 @@ import flixel.util.FlxGradient;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.animation.FlxBaseAnimation;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -35,15 +36,19 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = ['story mode', 'freeplay'];
 	#end
 
+	var bfMenu:FlxSprite;
+	//lol hi goomba -mispelles
+
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
 	var newInput:Bool = true;
-	var bg:FlxSprite = new FlxSprite(-89).loadGraphic(Paths.image('menuBG'));
+	var bg:FlxSprite = new FlxSprite(-89).loadGraphic(Paths.image('menuDesat'));
 
 	public static var nightly:String = "";
 
 	public static var mispellesEngineVer:String = "v1.0" + nightly;
 	public static var gameVer:String = "0.2.7.1";
+	var tex:FlxAtlasFrames;
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -57,6 +62,7 @@ class MainMenuState extends MusicBeatState
 		if (!FlxG.sound.music.playing)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			DiscordClient.changePresence("Browsin' tha MainMenu!!!", null);
 		}
 
 		persistentUpdate = persistentDraw = true;
@@ -70,15 +76,14 @@ class MainMenuState extends MusicBeatState
 		bg.angle = 179;
 		add(bg);
 
+		var backdrop:FlxBackdrop;
+		add(backdrop = new FlxBackdrop(Paths.image('cuntDots')));
+		backdrop.velocity.set(-40, -40);
+
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x55AE59E4, 0xAA19ECFF], 1, 90, true); 
-		gradientBar.y = FlxG.height - gradientBar.height;
-		add(gradientBar);
-		gradientBar.scrollFactor.set(0, 0);
-
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.18;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -90,6 +95,15 @@ class MainMenuState extends MusicBeatState
 		add(magenta);
 		// magenta.scrollFactor.set();
 
+		bfMenu = new FlxSprite(0, 250);
+		bfMenu.frames = Paths.getSparrowAtlas('BF_menu');
+		bfMenu.animation.addByPrefix('idle', 'bf menu', 24, false);
+		bfMenu.antialiasing = true;
+		bfMenu.scrollFactor.set();
+		bfMenu.animation.play('idle');
+		add(bfMenu);
+	
+
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -97,7 +111,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(-800, 40 + (i * 190));
+			var menuItem:FlxSprite = new FlxSprite(0, 40 + (i * 150));
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -112,7 +126,6 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.zoom = 3;
 
-		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
 		FlxTween.tween(bg, { angle:0}, 1, { ease: FlxEase.quartInOut});
 		FlxTween.tween(FlxG.camera, { zoom: 1}, 1.1, { ease: FlxEase.expoInOut });
 
@@ -166,7 +179,8 @@ class MainMenuState extends MusicBeatState
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
-					FlxG.switchState(new RPGState());
+					FlxG.switchState(new StoryMenuState());
+					DiscordClient.changePresence("Goin' in OverWorld!!", null);
 				}
 				else
 				{
@@ -200,14 +214,24 @@ class MainMenuState extends MusicBeatState
 								{
 									case 'story mode':
 										FlxG.switchState(new StoryMenuState());
+										#if windows
+										DiscordClient.changePresence("Goin' in StoryMode!!", null);
+										#end
 										trace("Story Menu Selected");
 									case 'freeplay':
 										FlxG.switchState(new FreeplayState());
+										#if windows
+										DiscordClient.changePresence("Goin' in FreePlay!!", null);
+										#end
 
 										trace("Freeplay Menu Selected");
 
 									case 'options':
 										FlxG.switchState(new OptionsMenu());
+										
+										#if windows
+										DiscordClient.changePresence("Goin' in Options!!", null);
+										#end
 								}
 							});
 						}
@@ -220,7 +244,6 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
 			camFollow.x = spr.getGraphicMidpoint().x;
 		});
 	}
@@ -234,12 +257,16 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
+		//fuck you lmao
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
 
+			bfMenu.animation.play('idle');
+
 			if (spr.ID == curSelected)
 			{
+				bfMenu.animation.play('idle');
 				spr.animation.play('selected');
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 			}

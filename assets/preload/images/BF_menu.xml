@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="BF_menu.png">
+	<!-- Created with Adobe Animate version 21.0.5.40714 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bf menu0000" x="0" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0001" x="0" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0002" x="474" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0003" x="474" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0004" x="948" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0005" x="948" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0006" x="1422" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0007" x="1422" y="0" width="474" height="463"/>
+	<SubTexture name="bf menu0008" x="0" y="463" width="474" height="463"/>
+	<SubTexture name="bf menu0009" x="0" y="463" width="474" height="463"/>
+	<SubTexture name="bf menu0010" x="0" y="463" width="474" height="463"/>
+	<SubTexture name="bf menu0011" x="0" y="463" width="474" height="463"/>
+	<SubTexture name="bf menu0012" x="0" y="463" width="474" height="463"/>
+	<SubTexture name="bf menu0013" x="0" y="463" width="474" height="463"/>
+</TextureAtlas>

@@ -10,6 +10,7 @@ import flixel.util.FlxColor;
 class MenuItem extends FlxSpriteGroup
 {
 	public var targetY:Float = 0;
+	public var targetX:Float = 0;
 	public var week:FlxSprite;
 	public var flashingInt:Int = 0;
 

@@ -10,6 +10,7 @@ import flixel.addons.transition.TransitionData;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
+import flixel.util.FlxGradient;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
@@ -23,6 +24,7 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
+import flixel.addons.display.FlxBackdrop;
 
 #if windows
 import Discord.DiscordClient;
@@ -31,6 +33,7 @@ import Discord.DiscordClient;
 #if cpp
 import sys.thread.Thread;
 #end
+
 
 using StringTools;
 
@@ -43,6 +46,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var gradientBar:FlxSprite = new FlxSprite(0,0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
 
 	var curWacky:Array<String> = [];
 
@@ -121,6 +125,7 @@ class TitleState extends MusicBeatState
 	}
 
 	var logoBl:FlxSprite;
+	var wave:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
@@ -157,13 +162,19 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
+		DiscordClient.changePresence("In the TitleScreen loadin' in!", null);
+
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		// bg.antialiasing = true;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
 
-		logoBl = new FlxSprite(-150, -100);
+		var backdrop:FlxBackdrop;
+		add(backdrop = new FlxBackdrop(Paths.image('titleScreen_checkers')));
+		backdrop.velocity.set(-40, -40);
+
+		logoBl = new FlxSprite(0, 50);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
@@ -177,6 +188,8 @@ class TitleState extends MusicBeatState
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
+		gfDance.x += 0;
+		gfDance.y += 900;
 		add(gfDance);
 		add(logoBl);
 
@@ -190,6 +203,12 @@ class TitleState extends MusicBeatState
 		titleText.y = 790;
 		// titleText.screenCenter(X);
 		add(titleText);
+
+		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x553D0468, 0xFF0000FF], 1, 90, true); 
+		gradientBar.y = FlxG.height - gradientBar.height;
+		add(gradientBar);
+		gradientBar.scrollFactor.set(0, 0);
+
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.screenCenter();
@@ -417,7 +436,7 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 1:
-				createCoolText(['mispelles', 'freddy', 'goomba', 'StarGazer', 'presents..']);
+				createCoolText(['mispelles', 'freddy', 'goomba', 'StarGazer', 'Ironik', 'presents..']);
 			// credTextShit.visible = true;
 			case 3:
 				addMoreText('A modification for..');

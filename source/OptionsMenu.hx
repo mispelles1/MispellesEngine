@@ -38,6 +38,9 @@ class OptionsMenu extends MusicBeatState
 			// new OffsetMenu("Get a note offset based off of your inputs!"),
 			new CustomizeGameplay("Drag'n'Drop Gameplay Modules around to your preference")
 		]),
+		new OptionCategory("Note Skins", [
+            new ChangeNoteSkin("Change thr your notes look in game!!")
+		]),
 		new OptionCategory("Appearance", [
 			#if desktop
 			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay."),

@@ -34,19 +34,20 @@ class OutdatedSubState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 		
-		var kadeLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('KadeEngineLogo'));
-		kadeLogo.scale.y = 0.3;
-		kadeLogo.scale.x = 0.3;
-		kadeLogo.x -= kadeLogo.frameHeight;
-		kadeLogo.y -= 180;
-		kadeLogo.alpha = 0.8;
-		add(kadeLogo);
+		var mispellesLogo:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('MispellesEngineLogo'));
+		mispellesLogo.scale.y = 0.3;
+		mispellesLogo.scale.x = 0.3;
+		mispellesLogo.x -= mispellesLogo.frameHeight;
+		mispellesLogo.y -= 180;
+		mispellesLogo.alpha = 0.8;
+		add(mispellesLogo);
 		
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Your Mispelles Engine will experience errors\nYou are on "
+			"Your ME version is outdated, Please get the new version from the GitHub!"
 			+ MainMenuState.mispellesEngineVer
-			+ "\nWeek 4 with Mommy Mearest will crash "
-			+ "\n\nPlease sit tight until new update for v1.1"
+			+ "\nWeek 4 with Mommy Mearest Has been fixed"
+			+ "\n\nChangeLog:"
+			+ "\nWeek 4 BugFixed, Dadbattle Bugfixed, New MainMenu, Freeplay Update, WinterHorrorLand Bugfixed"
 			+ "\nIf you experience bugs please let me know on my GitHub or Twitter @mispelles"
 			+ "\n\nPress Space to view the GitHub site\nor ESCAPE to ignore this",
 			32);
@@ -59,7 +60,7 @@ class OutdatedSubState extends MusicBeatState
 		add(txt);
 		
 		FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
-		FlxTween.angle(kadeLogo, kadeLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
+		FlxTween.angle(mispellesLogo, mispellesLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer)
 		{
@@ -70,14 +71,14 @@ class OutdatedSubState extends MusicBeatState
 		
 		new FlxTimer().start(2, function(tmr:FlxTimer)
 		{
-			if(kadeLogo.angle == -10) FlxTween.angle(kadeLogo, kadeLogo.angle, 10, 2, {ease: FlxEase.quartInOut});
-			else FlxTween.angle(kadeLogo, kadeLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
+			if(mispellesLogo.angle == -10) FlxTween.angle(mispellesLogo, mispellesLogo.angle, 10, 2, {ease: FlxEase.quartInOut});
+			else FlxTween.angle(mispellesLogo, mispellesLogo.angle, -10, 2, {ease: FlxEase.quartInOut});
 		}, 0);
 		
 		new FlxTimer().start(0.8, function(tmr:FlxTimer)
 		{
-			if(kadeLogo.alpha == 0.8) FlxTween.tween(kadeLogo, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
-			else FlxTween.tween(kadeLogo, {alpha: 0.8}, 0.8, {ease: FlxEase.quartInOut});
+			if(mispellesLogo.alpha == 0.8) FlxTween.tween(mispellesLogo, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
+			else FlxTween.tween(mispellesLogo, {alpha: 0.8}, 0.8, {ease: FlxEase.quartInOut});
 		}, 0);
 	}
 
@@ -85,7 +86,7 @@ class OutdatedSubState extends MusicBeatState
 	{
 		if (controls.ACCEPT)
 		{
-			fancyOpenURL("https://kadedev.github.io/Kade-Engine/changelogs/changelog-");
+			fancyOpenURL("https://github.com/mispelles1/MispellesEngine-v1.0");
 		}
 		if (controls.BACK)
 		{

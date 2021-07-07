@@ -46,7 +46,7 @@ class MainMenuState extends MusicBeatState
 
 	public static var nightly:String = "";
 
-	public static var mispellesEngineVer:String = "v1.0" + nightly;
+	public static var mispellesEngineVer:String = "v1.1" + nightly;
 	public static var gameVer:String = "0.2.7.1";
 	var tex:FlxAtlasFrames;
 

@@ -148,9 +148,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'spooky sing right', 24, false);
 				animation.addByIndices('danceLeft', 'spooky dance idle', [0, 2, 6], "", 12, false);
 				animation.addByIndices('danceRight', 'spooky dance idle', [8, 10, 12, 14], "", 12, false);
+				animation.addByPrefix('hey', 'SpookyPose', 24, false);
 
 				addOffset('danceLeft');
 				addOffset('danceRight');
+				addOffset('hey');
 
 				addOffset("singUP", -20, 26);
 				addOffset("singRIGHT", -130, -14);

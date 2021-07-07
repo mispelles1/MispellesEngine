@@ -3358,6 +3358,33 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
+		if (curSong == 'Spookeez') 
+	{
+			switch (curBeat)
+		{
+			case 23:
+				dad.playAnim('hey', true);
+			case 30:
+  				boyfriend.playAnim('hey', true);
+			case 39:
+				dad.playAnim('hey', true);
+			case 47:
+  				boyfriend.playAnim('hey', true);
+			case 63:
+				dad.playAnim('hey', true);
+			case 79:
+  				boyfriend.playAnim('hey', true);
+			case 87:
+				dad.playAnim('hey', true);
+			case 95:
+  				boyfriend.playAnim('hey', true);
+			case 103:
+				dad.playAnim('hey', true);
+			case 111:
+  				boyfriend.playAnim('hey', true);
+ 	}
+}
+
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, (FlxG.save.data.downscroll ? FlxSort.ASCENDING : FlxSort.DESCENDING));
